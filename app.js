@@ -26,15 +26,15 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
-      .text('Time (s)');
+      .text('Temperature (c)');
 }
 
 function drawPaths (svg, data, x, y) {
 
   var medianLine = d3.svg.line()
     .interpolate('basis')
-    .x(function (d) { return x(d.date); })
-    .y(function (d) { return y(d.pct50); });
+    .x(function (d) { return x(d.time); })
+    .y(function (d) { return y(d.temperature); });
 
   svg.datum(data);
 
@@ -51,10 +51,12 @@ function makeChart (data) {
       chartWidth  = svgWidth  - margin.left - margin.right,
       chartHeight = svgHeight - margin.top  - margin.bottom;
 
+  var maxTemperatureValue = 40;
+
   var x = d3.time.scale().range([0, chartWidth])
-            .domain(d3.extent(data, function (d) { return d.date; })),
+            .domain(d3.extent(data, function (d) { return d.time; })),
       y = d3.scale.linear().range([chartHeight, 0])
-            .domain([0, d3.max(data, function (d) { return 40; })]);
+            .domain([0, d3.max(data, function (d) { return maxTemperatureValue; })]);
 
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
                 .innerTickSize(-chartHeight).outerTickSize(0).tickPadding(10),
@@ -72,7 +74,9 @@ function makeChart (data) {
 }
 
 var parseDate  = d3.time.format('%Y-%m-%d').parse;
-d3.json('data.json', function (error, rawData) {
+var parseTime = d3.time.format('%H:%M:%S').parse;
+
+d3.json('thermal_data.json', function (error, rawData) {
   if (error) {
     console.error(error);
     return;
@@ -81,7 +85,8 @@ d3.json('data.json', function (error, rawData) {
   var data = rawData.map(function (d) {
     return {
       date:  parseDate(d.date),
-      pct50: d.pct50 / 1000,
+      time:  parseTime(d.time),
+      temperature: d.temperature,
     };
   });
   makeChart(data);
