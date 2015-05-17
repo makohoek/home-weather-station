@@ -19,7 +19,7 @@ def generate_sample_data():
 
 data=[]
 
-for i in range(1,340):
+for i in range(1,601):
     entry = generate_sample_data()
     data.append(entry)
     print entry
