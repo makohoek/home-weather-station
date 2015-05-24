@@ -86,3 +86,6 @@ if __name__ == '__main__':
         with open("thermal_data.json", "w") as datafile:
             parseable_data = json.dumps(data)
             datafile.write(parseable_data)
+
+        # wait a minute before requesting a new sample
+        time.sleep(60)
