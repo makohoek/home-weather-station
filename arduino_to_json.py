@@ -21,7 +21,8 @@ def get_today_string():
     return today
 
 config = {
-    'arduino_serial_port': '/dev/cu.usbmodem621'
+    'arduino_serial_port': '/dev/cu.usbmodem621',
+    'sample_interval': 0,
 }
 
 if __name__ == '__main__':
@@ -60,5 +61,5 @@ if __name__ == '__main__':
                 parseable_data = json.dumps(data)
                 datafile.write(parseable_data)
 
-            # wait a minute before requesting a new sample
-            time.sleep(0)
+            # wait before requesting a new sample
+            time.sleep(config['sample_interval'])
