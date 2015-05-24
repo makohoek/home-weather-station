@@ -20,9 +20,12 @@ def get_today_string():
     today = time.strftime("%Y-%m-%d", localtime)
     return today
 
+config = {
+    'arduino_serial_port': '/dev/cu.usbmodem621'
+}
 
 if __name__ == '__main__':
-    with TemperatureInterface() as arduino:
+    with TemperatureInterface(config['arduino_serial_port']) as arduino:
         data = []
 
         today_str = get_today_string()

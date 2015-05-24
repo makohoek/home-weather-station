@@ -4,8 +4,8 @@ import time
 
 class TemperatureInterface:
 
-    def __init__(self):
-        self.__serial_device = "/dev/cu.usbmodem621"
+    def __init__(self, arduino_serial_device):
+        self.__serial_device = arduino_serial_device
         self.__baudrate = 9600
         self.requestTemperatureCommandCode = '1'
 
