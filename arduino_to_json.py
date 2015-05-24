@@ -31,12 +31,6 @@ class TemperatureInterface:
     def request_new_sample(self):
         self.__connection.write(self.requestTemperatureCommandCode)
 
-    def wait_for_response(self):
-        # FIXME: for now, we are just sleeping after a request
-        # we should implement at arduino side a command to check if new sample
-        # is available
-        time.sleep(0.5)
-
     def retrieve_new_sample(self):
         sample_with_prefix = self.__read_sample()
         return sample_with_prefix.lstrip('C: ')
@@ -81,9 +75,6 @@ if __name__ == '__main__':
 
             # request a new sample
             arduino.request_new_sample()
-
-            # wait for the thermometer to process
-            arduino.wait_for_response()
 
             # prepare date
             localtime = time.localtime()
