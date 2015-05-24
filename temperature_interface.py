@@ -27,7 +27,10 @@ class TemperatureInterface:
 
     def retrieve_new_sample(self):
         sample_with_prefix = self.__read_sample()
-        return sample_with_prefix.lstrip('C: ')
+        # line can be cluttered with previous serial entry as well
+        # safest way to get the temperature is to take the last word
+        words = sample_with_prefix.split()
+        return words[len(words)-1]
 
     def __read_sample(self):
         temperature = self.__connection.readline()
