@@ -1,0 +1,10 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# mac temporary
+.DS_Store
+
+# data files should not be versioned since they can be generated
+*.json
