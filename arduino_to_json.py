@@ -2,42 +2,8 @@
 
 import json
 import os.path
-import re
-import serial
 import time
-
-
-# TODO: reimplement this as a client service design pattern
-class TemperatureInterface:
-
-    def __init__(self):
-        self.__serial_device = "/dev/cu.usbmodem621"
-        self.__baudrate = 9600
-        self.requestTemperatureCommandCode = '1'
-
-    def __enter__(self):
-        self.__connection = serial.Serial(
-            self.__serial_device,
-            self.__baudrate)
-        # FIXME: for now, we are just sleeping after a new connection
-        # we should implement at arduino side a command to check if
-        # serial connection is established
-        time.sleep(2)
-        return self
-
-    def __exit__(self, type, value, traceback):
-        self.__connection.close()
-
-    def request_new_sample(self):
-        self.__connection.write(self.requestTemperatureCommandCode)
-
-    def retrieve_new_sample(self):
-        sample_with_prefix = self.__read_sample()
-        return sample_with_prefix.lstrip('C: ')
-
-    def __read_sample(self):
-        temperature = self.__connection.readline()
-        return temperature.strip()
+from temperature_interface import TemperatureInterface
 
 
 def temperature_sample_to_json(today, now, temperature):
@@ -92,4 +58,4 @@ if __name__ == '__main__':
                 datafile.write(parseable_data)
 
             # wait a minute before requesting a new sample
-            time.sleep(60)
+            time.sleep(0)
