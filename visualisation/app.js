@@ -51,12 +51,13 @@ function makeChart (data) {
       chartWidth  = svgWidth  - margin.left - margin.right,
       chartHeight = svgHeight - margin.top  - margin.bottom;
 
-  var maxTemperatureValue = 40;
+  var maxTemperatureValue = 30;
+  var minTemperatureValue = 10;
 
   var x = d3.time.scale().range([0, chartWidth])
             .domain(d3.extent(data, function (d) { return d.time; })),
       y = d3.scale.linear().range([chartHeight, 0])
-            .domain([0, d3.max(data, function (d) { return maxTemperatureValue; })]);
+            .domain([minTemperatureValue, maxTemperatureValue]);
 
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
                 .innerTickSize(-chartHeight).outerTickSize(0).tickPadding(10),
