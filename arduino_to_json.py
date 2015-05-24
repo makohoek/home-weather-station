@@ -7,7 +7,7 @@ import serial
 import time
 
 
-#TODO: reimplement this as a client service design pattern
+# TODO: reimplement this as a client service design pattern
 class TemperatureInterface:
 
     def __init__(self):
@@ -16,7 +16,9 @@ class TemperatureInterface:
         self.requestTemperatureCommandCode = '1'
 
     def __enter__(self):
-        self.__connection = serial.Serial(self.__serial_device, self.__baudrate)
+        self.__connection = serial.Serial(
+            self.__serial_device,
+            self.__baudrate)
         # FIXME: for now, we are just sleeping after a new connection
         # we should implement at arduino side a command to check if
         # serial connection is established
