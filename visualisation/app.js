@@ -77,7 +77,11 @@ function makeChart (data) {
 var parseDate  = d3.time.format('%Y-%m-%d').parse;
 var parseTime = d3.time.format('%H:%M:%S').parse;
 
-d3.json('thermal_data.json', function (error, rawData) {
+var today = new Date();
+var format = d3.time.format('%Y-%m-%d');
+var today_string = format(today);
+
+d3.json('temperature_'+today_string+'.json', function (error, rawData) {
   if (error) {
     console.error(error);
     return;

@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-import pprint
+import json
+import os.path
 import re
 import serial
 import time
-import json
 
 
 #TODO: reimplement this as a client service design pattern
@@ -63,13 +63,17 @@ if __name__ == '__main__':
     with TemperatureInterface() as arduino:
         data = []
 
-        #TODO: add daystring in filename
         today_str = get_today_string()
         filename = 'temperature_' + today_str + '.json'
 
+        # create file if it does not exists
+        if not os.path.isfile(filename):
+            with open(filename, "w") as newfile:
+                newfile.write('[]')
+
         while True:
             # get current data
-            with open("thermal_data.json", "r") as datafile:
+            with open(filename, "r") as datafile:
                 data = json.load(datafile)
                 print data
 
@@ -90,7 +94,7 @@ if __name__ == '__main__':
             data.append(temperature_sample_to_json(today, now, sample))
 
             # write it back to the file
-            with open("thermal_data.json", "w") as datafile:
+            with open(filename, "w") as datafile:
                 parseable_data = json.dumps(data)
                 datafile.write(parseable_data)
 
