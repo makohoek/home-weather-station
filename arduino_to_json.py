@@ -59,29 +59,30 @@ if __name__ == '__main__':
     #TODO: add daystring in filename
     today_str = get_today_string()
     current_data_file = 'temperature_' + today_str + '.json'
-    # get current data
-    with open("thermal_data.json", "r") as datafile:
-        data = json.load(datafile)
-        print data
 
-    # request a new sample
-    arduino.request_new_sample()
+    while True:
+        # get current data
+        with open("thermal_data.json", "r") as datafile:
+            data = json.load(datafile)
+            print data
 
-    # wait for the thermometer to process
-    arduino.wait_for_response()
+        # request a new sample
+        arduino.request_new_sample()
 
-    # prepare date
-    localtime = time.localtime()
-    today = time.strftime("%Y-%m-%d", localtime)
-    now = time.strftime("%H:%M:%S", localtime)
-    # retrieve the sample
-    sample = arduino.retrieve_new_sample()
+        # wait for the thermometer to process
+        arduino.wait_for_response()
 
-    # put the sample in json format to the current data
-    data.append(temperature_sample_to_json(today, now, sample))
+        # prepare date
+        localtime = time.localtime()
+        today = time.strftime("%Y-%m-%d", localtime)
+        now = time.strftime("%H:%M:%S", localtime)
+        # retrieve the sample
+        sample = arduino.retrieve_new_sample()
 
-    # write it back to the file
-    with open("thermal_data.json", "w") as datafile:
-        parseable_data = json.dumps(data)
-        datafile.write(parseable_data)
+        # put the sample in json format to the current data
+        data.append(temperature_sample_to_json(today, now, sample))
 
+        # write it back to the file
+        with open("thermal_data.json", "w") as datafile:
+            parseable_data = json.dumps(data)
+            datafile.write(parseable_data)
