@@ -4,6 +4,12 @@ svg {
   font: 14px 'Open Sans';
 }
 
+/*
+ * colors from adobe kuler
+ * https://color.adobe.com/Phaedra-color-theme-1764754/edit/?copy=true
+ */
+
+
 .axis path,
 .axis line {
   fill: none;
@@ -16,7 +22,7 @@ svg {
 }
 
 .axis .tick line {
-  stroke: rgba(0, 0, 0, 0.1);
+  stroke: rgba(121, 189, 143, 0.5);
 }
 
 .area {
@@ -38,8 +44,8 @@ svg {
 .median-line,
 .legend .median-line {
   fill: none;
-  stroke: #000;
-  stroke-width: 3;
+  stroke: #FF6138;
+  stroke-width: 2;
 }
 
 .legend .legend-bg {
