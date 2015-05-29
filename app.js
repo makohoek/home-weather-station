@@ -54,7 +54,7 @@ function makeChart (data) {
   var x = d3.time.scale().range([0, chartWidth])
             .domain(d3.extent(data, function (d) { return d.date; })),
       y = d3.scale.linear().range([chartHeight, 0])
-            .domain([0, d3.max(data, function (d) { return d.pct95; })]);
+            .domain([0, d3.max(data, function (d) { return 40; })]);
 
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
                 .innerTickSize(-chartHeight).outerTickSize(0).tickPadding(10),
@@ -81,11 +81,7 @@ d3.json('data.json', function (error, rawData) {
   var data = rawData.map(function (d) {
     return {
       date:  parseDate(d.date),
-      pct05: d.pct05 / 1000,
-      pct25: d.pct25 / 1000,
       pct50: d.pct50 / 1000,
-      pct75: d.pct75 / 1000,
-      pct95: d.pct95 / 1000
     };
   });
   makeChart(data);
