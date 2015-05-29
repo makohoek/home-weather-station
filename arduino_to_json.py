@@ -4,6 +4,7 @@ import json
 import os.path
 import time
 from temperature_interface import TemperatureInterface
+from configuration import config
 
 
 def temperature_sample_to_json(today, now, temperature):
@@ -19,11 +20,6 @@ def get_today_string():
     localtime = time.localtime()
     today = time.strftime("%Y-%m-%d", localtime)
     return today
-
-config = {
-    'arduino_serial_port': '/dev/cu.usbmodem621',
-    'sample_interval': 0,
-}
 
 if __name__ == '__main__':
     with TemperatureInterface(config['arduino_serial_port']) as arduino:
