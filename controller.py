@@ -25,15 +25,15 @@ if __name__ == '__main__':
     with TemperatureInterface(config['arduino_serial_port']) as arduino:
         data = []
 
-        today_str = get_today_string()
-        filename = 'temperature_' + today_str + '.json'
-
-        # create file if it does not exists
-        if not os.path.isfile(filename):
-            with open(filename, "w") as newfile:
-                newfile.write('[]')
-
         while True:
+            today_str = get_today_string()
+            filename = 'temperature_' + today_str + '.json'
+
+            # create file if it does not exists
+            if not os.path.isfile(filename):
+                with open(filename, "w") as newfile:
+                    newfile.write('[]')
+
             # get current data
             with open(filename, "r") as datafile:
                 data = json.load(datafile)
