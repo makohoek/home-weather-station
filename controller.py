@@ -2,6 +2,7 @@
 
 import json
 import os.path
+import shutil
 import time
 from temperature_interface import TemperatureInterface
 from configuration import config
@@ -56,6 +57,8 @@ if __name__ == '__main__':
             with open(filename, "w") as datafile:
                 parseable_data = json.dumps(data)
                 datafile.write(parseable_data)
+
+            shutil.copyfile(filename, 'visualisation/' + filename)
 
             # wait before requesting a new sample
             time.sleep(config['sample_interval'])
