@@ -16,6 +16,14 @@ Hardware setup
 * Some wire jumpers
 * A host PC with python
 
+### Arduino wiring
+The wiring is done as illustrated:
+![visualization](./readme_images/arduino_wiring.png)
+* the *green* wire is for the data line, which is the central pin
+* the *red* wire goes through the 4.7k resistor first, then powers the DSB18B20
+  via the data line.
+* the *black* wire is for linking GND and VDD to GND
+
 Software setup
 --------------
 ### Prerequisites
