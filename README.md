@@ -47,7 +47,9 @@ Then, edit the configuration file to match your setup:
 
 Here is my current configuration:
 
-    config = {
-        'arduino_serial_port': '/dev/cu.usbmodem621',
-        'sample_interval': 10,
-    }
+```javascript
+config = {
+    'arduino_serial_port': '/dev/cu.usbmodem621',
+    'sample_interval': 10,
+}
+```
