@@ -3,6 +3,9 @@ home-weather-station
 
 An arduino based weather station with visualisations powered by d3js.
 
+It is able to generate graphs of the temperature in SVG format which looks like this:
+![visualization](./readme_images/data_visualisation_screenshot.png)
+
 Hardware setup
 --------------
 ### Prerequisites
