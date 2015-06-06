@@ -5,7 +5,6 @@ import os.path
 import shutil
 import time
 from temperature_interface import TemperatureInterface
-from configuration import config
 
 
 def temperature_sample_to_json(today, now, temperature):
@@ -23,6 +22,9 @@ def get_today_string():
     return today
 
 if __name__ == '__main__':
+    with open('configuration.json') as main_configuration_file:
+        config = json.load(main_configuration_file)
+
     with TemperatureInterface(config['arduino_serial_port']) as arduino:
         data = []
 

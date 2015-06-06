@@ -56,13 +56,13 @@ Replace the thermometer address with *my_serial_number* and flash this .pde file
 #### Core configuration
 Then, edit the configuration file to match your setup:
 
-    vim configuration.py
+    vim configuration.json
 
 Here is my current configuration:
 
-```javascript
-config = {
-    'arduino_serial_port': '/dev/cu.usbmodem621',
-    'sample_interval': 10,
+```json
+{
+    "arduino_serial_port": "/dev/cu.usbmodem621",
+    "sample_interval": 10
 }
 ```

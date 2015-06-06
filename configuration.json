@@ -1,0 +1,4 @@
+{
+    "arduino_serial_port": "/dev/cu.usbmodem621",
+    "sample_interval": 0
+}
