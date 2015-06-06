@@ -52,7 +52,7 @@ function makeChart (data) {
       chartHeight = svgHeight - margin.top  - margin.bottom;
 
   var maxTemperatureValue = 30;
-  var minTemperatureValue = 10;
+  var minTemperatureValue = 18;
 
   var x = d3.time.scale().range([0, chartWidth])
             .domain(d3.extent(data, function (d) { return d.time; })),
