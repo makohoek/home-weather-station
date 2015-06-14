@@ -6,11 +6,12 @@ import random
 import time_utils
 from time import sleep
 
+
 def generate_sample_data():
-    today=time_utils.get_today_string()
-    now=time_utils.get_now_string()
-    temperature=random.randint(18,32)
-    entry={
+    today = time_utils.get_today_string()
+    now = time_utils.get_now_string()
+    temperature = random.randint(18, 32)
+    entry = {
         "date": today,
         "time": now,
         "temperature": temperature,
@@ -18,7 +19,7 @@ def generate_sample_data():
     return entry
 
 
-data=[]
+data = []
 
 while True:
 

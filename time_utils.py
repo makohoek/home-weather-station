@@ -6,8 +6,8 @@ def get_today_string():
     today = time.strftime("%Y-%m-%d", localtime)
     return today
 
+
 def get_now_string():
     localtime = time.localtime()
     today = time.strftime("%Y-%m-%d", localtime)
     return today
-
