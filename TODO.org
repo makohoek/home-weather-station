@@ -1,0 +1,18 @@
+* coding style
+  - [x] use autopep8 on all file
+
+* refactor
+  - [ ] Refactor controller and generate random data:
+        the only difference should be which data interface they are using:
+        - random or
+        - real arduino values
+        -> I can start with creating a common interface, which haves to
+          be implemented by both arduino and random data classes
+        -> this will simplify a lot the code
+        -> Maybe i could use the configuration file
+          to setup if we want fake data or real?
+  - [ ] Refactor get arduino data to reuse arduino/common interface
+
+* doc:
+  - [ ] How to access website once setup is done
+  - [ ] More detailed setup
