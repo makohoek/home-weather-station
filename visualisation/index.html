@@ -18,6 +18,10 @@
                   drawChartByDateName('temperature_'+dateText+'.json');
               }
           });
+          // set current's date as default
+          $( "#datepicker" ).datepicker('setDate', new Date());
+          // simulate a click to trigger selection
+          $('.ui-datepicker-current-day').click();
       });
     </script>
   </head>
