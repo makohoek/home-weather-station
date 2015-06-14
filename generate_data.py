@@ -3,12 +3,12 @@
 import json
 import os.path
 import random
-import time
+import time_utils
+from time import sleep
 
 def generate_sample_data():
-    localtime=time.localtime()
-    today=time.strftime("%Y-%m-%d", localtime)
-    now=time.strftime("%H:%M:%S", localtime)
+    today=time_utils.get_today_string()
+    now=time_utils.get_now_string()
     temperature=random.randint(18,32)
     entry={
         "date": today,
@@ -18,16 +18,11 @@ def generate_sample_data():
     return entry
 
 
-def get_today_string():
-    localtime = time.localtime()
-    today = time.strftime("%Y-%m-%d", localtime)
-    return today
-
 data=[]
 
 while True:
 
-    today_str = get_today_string()
+    today_str = time_utils.get_today_string()
     filename = '_fake_temperature_' + today_str + '.json'
 
     if not os.path.isfile(filename):
@@ -48,4 +43,4 @@ while True:
         datafile.write(parseable_data)
 
     # wait before requesting a new sample
-    time.sleep(1)
+    sleep(1)

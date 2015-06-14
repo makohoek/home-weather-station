@@ -3,7 +3,8 @@
 import json
 import os.path
 import shutil
-import time
+import time_utils
+from time import sleep
 from temperature_interface import TemperatureInterface
 
 
@@ -16,11 +17,6 @@ def temperature_sample_to_json(today, now, temperature):
     return entry
 
 
-def get_today_string():
-    localtime = time.localtime()
-    today = time.strftime("%Y-%m-%d", localtime)
-    return today
-
 if __name__ == '__main__':
     with open('configuration.json') as main_configuration_file:
         config = json.load(main_configuration_file)
@@ -29,7 +25,7 @@ if __name__ == '__main__':
         data = []
 
         while True:
-            today_str = get_today_string()
+            today_str = time_utils.get_today_string()
             filename = 'temperature_' + today_str + '.json'
 
             # create file if it does not exists
@@ -46,9 +42,8 @@ if __name__ == '__main__':
             arduino.request_new_sample()
 
             # prepare date
-            localtime = time.localtime()
-            today = time.strftime("%Y-%m-%d", localtime)
-            now = time.strftime("%H:%M:%S", localtime)
+            today = time_utils.get_today_string()
+            now = time_utils.get_now_string()
             # retrieve the sample
             sample = arduino.retrieve_new_sample()
 
@@ -63,4 +58,4 @@ if __name__ == '__main__':
             shutil.copyfile(filename, 'visualisation/' + filename)
 
             # wait before requesting a new sample
-            time.sleep(config['sample_interval'])
+            sleep(config['sample_interval'])
