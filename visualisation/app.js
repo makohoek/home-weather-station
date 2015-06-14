@@ -81,18 +81,21 @@ var today = new Date();
 var format = d3.time.format('%Y-%m-%d');
 var today_string = format(today);
 
-d3.json('temperature_'+today_string+'.json', function (error, rawData) {
-  if (error) {
-    console.error(error);
-    return;
-  }
+function drawChartByDateName(filename){
+  d3.json(filename, function (error, rawData) {
+    if (error) {
+      console.error(error);
+      return;
+    }
 
-  var data = rawData.map(function (d) {
-    return {
-      date:  parseDate(d.date),
-      time:  parseTime(d.time),
-      temperature: d.temperature,
-    };
+    var data = rawData.map(function (d) {
+      return {
+        date:  parseDate(d.date),
+        time:  parseTime(d.time),
+        temperature: d.temperature,
+      };
+    });
+    makeChart(data);
   });
-  makeChart(data);
-});
+}
+drawChartByDateName(today_string)
