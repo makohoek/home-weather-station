@@ -98,4 +98,3 @@ function drawChartByDateName(filename){
     makeChart(data);
   });
 }
-drawChartByDateName(today_string)

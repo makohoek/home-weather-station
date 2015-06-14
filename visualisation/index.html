@@ -4,11 +4,24 @@
     <meta charset="utf-8">
     <title>Home temperature</title>
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+    <script src="jquery-ui/external/jquery/jquery.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <script src="d3/d3.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+      $(function() {
+          $( "#datepicker" ).datepicker({
+              dateFormat: "yy-mm-dd",
+              onSelect: function(dateText, instance){
+                  drawChartByDateName('temperature_'+dateText+'.json');
+              }
+          });
+      });
+    </script>
   </head>
 
   <body>
+    <p>Select date: <input type="text" id="datepicker"></p>
   </body>
-
-  <script src="d3/d3.min.js"></script>
-  <script src="app.js"></script>
 </html>
