@@ -14,6 +14,7 @@
           $( "#datepicker" ).datepicker({
               dateFormat: "yy-mm-dd",
               onSelect: function(dateText, instance){
+                  removeChart();
                   drawChartByDateName('temperature_'+dateText+'.json');
               }
           });

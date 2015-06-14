@@ -44,6 +44,10 @@ function drawPaths (svg, data, x, y) {
     .attr('clip-path', 'url(#rect-clip)');
 }
 
+function removeChart() {
+  d3.select('body').select('svg').remove();
+}
+
 function makeChart (data) {
   var svgWidth  = 960,
       svgHeight = 500,
