@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-import pprint
+import json
+import os.path
 import random
-import re
 import time
 
 def generate_sample_data():
@@ -17,17 +17,35 @@ def generate_sample_data():
     }
     return entry
 
+
+def get_today_string():
+    localtime = time.localtime()
+    today = time.strftime("%Y-%m-%d", localtime)
+    return today
+
 data=[]
 
-for i in range(1,601):
+while True:
+
+    today_str = get_today_string()
+    filename = '_fake_temperature_' + today_str + '.json'
+
+    if not os.path.isfile(filename):
+        with open(filename, "w") as newfile:
+            newfile.write('[]')
+
+    # get current data
+    with open(filename, "r") as datafile:
+        data = json.load(datafile)
+        print data
+
     entry = generate_sample_data()
     data.append(entry)
-    print entry
-    time.sleep(1)
 
-with open("thermal_data.json","w") as datafile:
-    # d3js reads with double quotes, whereas
-    # pprint renders the data strings in simple quotes
-    # therefore, we need to substitute ' by "
-    parseable_data=re.sub("\'","\"", pprint.saferepr(data))
-    datafile.write(parseable_data)
+    # write it back to the file
+    with open(filename, "w") as datafile:
+        parseable_data = json.dumps(data)
+        datafile.write(parseable_data)
+
+    # wait before requesting a new sample
+    time.sleep(1)
