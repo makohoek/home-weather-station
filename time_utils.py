@@ -9,5 +9,5 @@ def get_today_string():
 
 def get_now_string():
     localtime = time.localtime()
-    today = time.strftime("%Y-%m-%d", localtime)
+    today = time.strftime("%H:%M:%S", localtime)
     return today
