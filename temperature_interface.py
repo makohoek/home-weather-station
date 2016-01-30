@@ -3,8 +3,9 @@ import random
 import serial
 import time
 
+
 class TemperatureInterface:
-    __metaclass__  = abc.ABCMeta
+    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def request_new_sample(self):
@@ -13,6 +14,7 @@ class TemperatureInterface:
     @abc.abstractmethod
     def retrieve_new_sample(self):
         pass
+
 
 class ArduinoTemperature(TemperatureInterface):
 
@@ -48,6 +50,7 @@ class ArduinoTemperature(TemperatureInterface):
         temperature = self.__connection.readline()
         return temperature.strip()
 
+
 class RandomTemperature(TemperatureInterface):
 
     def __init__(self, min_value, max_value):
@@ -63,7 +66,8 @@ class RandomTemperature(TemperatureInterface):
         pass
 
     # random access does not needs to request a sample to underlying hardware
-    # FIXME: this should probably be removed from TemperatureInterface since it HW dependent
+    # FIXME: this should probably be removed from TemperatureInterface since
+    # it HW dependent
     def request_new_sample(self):
         return 0
 
