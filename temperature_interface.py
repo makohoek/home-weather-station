@@ -1,4 +1,5 @@
 import abc
+import random
 import serial
 import time
 
@@ -46,3 +47,25 @@ class ArduinoTemperature(TemperatureInterface):
     def __read_sample(self):
         temperature = self.__connection.readline()
         return temperature.strip()
+
+class RandomTemperature(TemperatureInterface):
+
+    def __init__(self, min_value, max_value):
+        self.__min_value = min_value
+        self.__max_value = max_value
+
+    # FIXME: to use each Temp as a resource, i should probably move this to
+    # base class
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        pass
+
+    # random access does not needs to request a sample to underlying hardware
+    # FIXME: this should probably be removed from TemperatureInterface since it HW dependent
+    def request_new_sample(self):
+        return 0
+
+    def retrieve_new_sample(self):
+        return random.randint(self.__min_value, self.__max_value)
