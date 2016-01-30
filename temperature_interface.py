@@ -1,8 +1,19 @@
+import abc
 import serial
 import time
 
-
 class TemperatureInterface:
+    __metaclass__  = abc.ABCMeta
+
+    @abc.abstractmethod
+    def request_new_sample(self):
+        pass
+
+    @abc.abstractmethod
+    def retrieve_new_sample(self):
+        pass
+
+class ArduinoTemperature(TemperatureInterface):
 
     def __init__(self, arduino_serial_device):
         self.__serial_device = arduino_serial_device
