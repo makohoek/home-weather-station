@@ -1,18 +1,27 @@
 * coding style
-  - [x] use autopep8 on all file
+  - [X] use autopep8 on all file
 
-* refactor
-  - [ ] Refactor controller and generate random data:
+* core [2/5]
+  - [X] Refactor controller and generate random data:
         the only difference should be which data interface they are using:
-        - random or
-        - real arduino values
-        -> I can start with creating a common interface, which haves to
+        - [X] random or
+        - [X] real arduino values
+        - [X] > I can start with creating a common interface, which haves to
           be implemented by both arduino and random data classes
-        -> this will simplify a lot the code
-        -> Maybe i could use the configuration file
+        - [X] > this will simplify a lot the code
+        - [X] > Maybe i could use the configuration file
           to setup if we want fake data or real?
-  - [ ] Refactor get arduino data to reuse arduino/common interface
-
+  - [X] Refactor get arduino data to reuse arduino/common interface
+  - [ ] Refactor TemperatureInterface to force __enter__ and __exit__
+  - [ ] Simplify TemperatureInterface usage, we should just have the function
+        to get a new value; no need for request (blocking on read is fine)
+  - [ ] main and generate_data should start webserver as well
+* web [0/5]
+  - [ ] responsive visualisation
+  - [ ] jQuery mobile or equivalent for mobile
+  - [ ] remove need for internet to load the website (local only should work)
+  - [ ] favicon
 * doc:
   - [ ] How to access website once setup is done
   - [ ] More detailed setup
+  - [ ] Update README with changes
