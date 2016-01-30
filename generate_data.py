@@ -18,30 +18,30 @@ def generate_sample_data():
     }
     return entry
 
+if __name__ == "__main__":
+    data = []
 
-data = []
+    while True:
 
-while True:
+        today_str = time_utils.get_today_string()
+        filename = '_fake_temperature_' + today_str + '.json'
 
-    today_str = time_utils.get_today_string()
-    filename = '_fake_temperature_' + today_str + '.json'
+        if not os.path.isfile(filename):
+            with open(filename, "w") as newfile:
+                newfile.write('[]')
 
-    if not os.path.isfile(filename):
-        with open(filename, "w") as newfile:
-            newfile.write('[]')
+        # get current data
+        with open(filename, "r") as datafile:
+            data = json.load(datafile)
+            print data
 
-    # get current data
-    with open(filename, "r") as datafile:
-        data = json.load(datafile)
-        print data
+        entry = generate_sample_data()
+        data.append(entry)
 
-    entry = generate_sample_data()
-    data.append(entry)
+        # write it back to the file
+        with open(filename, "w") as datafile:
+            parseable_data = json.dumps(data)
+            datafile.write(parseable_data)
 
-    # write it back to the file
-    with open(filename, "w") as datafile:
-        parseable_data = json.dumps(data)
-        datafile.write(parseable_data)
-
-    # wait before requesting a new sample
-    sleep(1)
+        # wait before requesting a new sample
+        sleep(1)
